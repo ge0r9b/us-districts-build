@@ -38,7 +38,7 @@ Fixed and live (verified by the tests named; run them yourself, section 6):
 | Safari list jumping (t234 and t203): scroll preserved, redundant rebuilds skipped, iOS toolbar resize swallowed, `overscroll-behavior: contain` | 1527 | `scroll-stable.py` (Chromium emulation; **not verified on real iPhone or WebKit**) |
 | Back button, keyboard, popstate, history stack (t225–t230) | 1527 | `filter-back.py` |
 | Delta sort by |net| as displayed (t272/t273), # bars to scale (t274/t275), Arizona 2020 precincts, `'20 n/a` rows | 1530 | `sort-scale.py` |
-| Sort tap-flip + bubble (t229); sort hidden under search/full-screen filter (t239) | 1527 / 1528 | `sort-flip.py` (no dedicated test for t239 yet) |
+| Sort tap-flip + bubble (t229); sort hidden under search/full-screen filter (t239) | 1527 / 1528 | `sort-flip.py` (dedicated test added: tests/sort-under-search.py) |
 | Idaho/all-state town rows area-weighted with ≈ instead of "no data" (t231/t232) | 1527 | `idaho-towns.py` |
 | No text under floating buttons (t235/t236); delta net/scale layout (t237/t238) | 1528 | `label-clamp.py`, `delta-scale.py` |
 | List-all line and pie rows; chart-type rule; chart button in map; line delta labels (t240, t249–t254) | 1528 | `chart-modes-list.py`, `chart-line-single.py` |
