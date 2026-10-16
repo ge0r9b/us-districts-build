@@ -4,8 +4,8 @@ Read this first, then `docs/us-districts-spec.md` (full spec, also as `.docx`) a
 
 ## 1. Purpose and live URL
 A static map and results viewer for US elections (President 2020 and 2024, plus state legislatures, US House and school districts where data exists). Users pick an **institution** (top field) and a **geo** (bottom field), see a map or a list, and compare results by bar, line or pie.
-- Live: https://ge0r9b.github.io/us-districts/v2/ (GitHub Pages, branch `main`)
-- Repo: github.com/ge0r9b/us-districts. App = `v2/index.html`. Data = `v2/data/*.js` (+ `COVERAGE.md`).
+- Live: https://ge0r9b.github.io/us-districts-build/v2/ (GitHub Pages, branch `main`)
+- Repo: github.com/ge0r9b/us-districts-build. App = `v2/index.html`. Data = `v2/data/*.js` (+ `COVERAGE.md`).
 
 ## 2. Architecture
 - **One file app:** `v2/index.html` (HTML, CSS and about 3,400 lines of JS, Leaflet from `lib/`). No build step. Every change is an edit to this file.
@@ -57,13 +57,13 @@ Fixed and live (verified by the tests named; run them yourself, section 6):
 2016 presidential data (staging folder, official sources first); Canada (per-country config exists, parked); move to Supabase or Neon + PostGIS when data reaches 700–800 MB (about 176 MB today; schema proposal in spec 4.2); presets and navigation tabs; offline copy; lighter-data plan (tiles/CDN for past elections); live user votes (`vote` table, Auth, one vote per user per topic); businesses/brands/international directories.
 
 ## 6. Tests
-Playwright (Python). Serve locally: `cd us-districts && python3 -m http.server 8765`, then
+Playwright (Python). Serve locally: `cd us-districts-build && python3 -m http.server 8765`, then
 `python3 tests/<name>.py http://localhost:8765/v2/` (or the live URL). Each test prints `OK`/`FAIL` lines and `FAILS <n>`, and exits non-zero on failure. Most check desktop (1280x800) and phone (390x780, touch). Run one at a time (they are heavy; parallel runs clobber timing). Core set before any push: `sort-scale, scroll-stable, type-switch, filter-back, sort-flip, label-clamp, delta-scale, chart-line-single, chart-modes-list, district-list-view, district-consistency, idaho-towns, unisearch, list-all-renders, list-all-clean`. Others in `tests/` cover icons, abbreviations, persistence, menus, estimates. Screenshots are written to `/tmp` by some tests.
 
 ## 7. Build, bump, deploy
 1. Edit `v2/index.html`; syntax check (extract the last big `<script>` and `new Function(...)`).
 2. Bump `window.BUILD` on line 9 (format `YYYYMMDDNNNN`, e.g. `202610151528`).
-3. Run the core tests locally, then `git add -A && git commit -m "Build NNNN: …" && git push` (branch `main`). GitHub Pages deploys in about 1–2 minutes: poll `curl -s https://ge0r9b.github.io/us-districts/v2/?x=1 | grep -o 'BUILD="[0-9]*"'`.
+3. Run the core tests locally, then `git add -A && git commit -m "Build NNNN: …" && git push` (branch `main`). GitHub Pages deploys in about 1–2 minutes: poll `curl -s https://ge0r9b.github.io/us-districts-build/v2/?x=1 | grep -o 'BUILD="[0-9]*"'`.
 4. Re-run the relevant tests against the live URL; report with the build number and screenshot paths.
 5. Spec: edit `docs/us-districts-spec.md`; regenerate `.docx` with a markdown-to-docx script (python-docx; fixed table widths). Update the changelog table.
 
